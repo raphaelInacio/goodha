@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: goodha-app-api
+    name: accounts-service
   cloud:
     gcp:
       datastore:

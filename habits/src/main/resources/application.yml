@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: goodha-app-api
+    name: habits-service
   cloud:
     gcp:
       datastore:
