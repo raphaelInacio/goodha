@@ -1,4 +1,4 @@
-package br.com.goodha.habits;
+package br.com.goodha.records;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,18 +7,18 @@ import lombok.NoArgsConstructor;
 import org.springframework.cloud.gcp.data.datastore.core.mapping.Entity;
 import org.springframework.data.annotation.Id;
 
+import java.time.LocalDateTime;
 
 @Data
 @Entity(name = "Habits")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Habit {
+public class Record {
     @Id
     private Long id;
+    private Long habitId;
     private Long accountId;
-    private String name;
-    private String longDescription;
-    private String image;
-    private String longImage;
+    private LocalDateTime date;
+    private Boolean done = false;
 }

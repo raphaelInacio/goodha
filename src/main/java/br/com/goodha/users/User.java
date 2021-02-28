@@ -1,4 +1,4 @@
-package br.com.goodha.habits;
+package br.com.goodha.users;
 
 import lombok.Data;
 
