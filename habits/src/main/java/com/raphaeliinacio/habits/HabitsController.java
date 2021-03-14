@@ -1,4 +1,4 @@
-package br.com.goodha.habits;
+package com.raphaeliinacio.habits;
 
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -23,11 +23,6 @@ public class HabitsController {
 
     @Autowired
     private ModelMapper modelMapper;
-
-    @GetMapping("/hello")
-    public ResponseEntity<String> hello() {
-        return ResponseEntity.ok("Hello World!");
-    }
 
     @GetMapping
     public ResponseEntity<List<HabitPresentation>> listHabits() {
@@ -56,7 +51,7 @@ public class HabitsController {
 
     @PutMapping("/{id}")
     public ResponseEntity<HabitPresentation> update(@RequestBody HabitPresentation presentation, @PathVariable Long id) {
-        log.info("..: Atualizando um novo habito");
+        log.info("..: Atualizando um novo habito, {}, com id, {}", presentation, id);
         var habit = habitRepository.findById(id);
 
         if (habit.isEmpty()) {

@@ -1,4 +1,4 @@
-package br.com.goodha;
+package com.raphaeliinacio.accounts;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

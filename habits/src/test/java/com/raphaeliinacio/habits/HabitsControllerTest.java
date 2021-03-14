@@ -1,6 +1,5 @@
-package br.com.goodha.habits;
+package com.raphaeliinacio.habits;
 
-import br.com.goodha.GoodhaApplication;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +12,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(classes = GoodhaApplication.class)
+@SpringBootTest(classes = HabitsApplication.class)
 @AutoConfigureMockMvc
 class HabitsControllerTest {
 
     ObjectMapper mapper = new ObjectMapper();
-
-    @Test
-    void exampleTest(@Autowired MockMvc mvc) throws Exception {
-        mvc.perform(get("/v1/habits/hello")).andExpect(status().isOk()).andExpect(content().string("Hello World!"));
-    }
 
     @Test
     void deveListarHabitosCorretamente(@Autowired MockMvc mvc) throws Exception {

@@ -1,4 +1,5 @@
-package br.com.goodha.habits;
+package com.raphaeliinacio.accounts;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,18 +8,16 @@ import lombok.NoArgsConstructor;
 import org.springframework.cloud.gcp.data.datastore.core.mapping.Entity;
 import org.springframework.data.annotation.Id;
 
+import java.util.List;
 
 @Data
-@Entity(name = "Habits")
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class Habit {
-    @Id
+@NoArgsConstructor
+public class AccountPresentation {
     private Long id;
-    private Long accountId;
+    private AccountTypeEnum accountTypeEnum;
     private String name;
-    private String longDescription;
-    private String image;
-    private String longImage;
+    private String email;
+    private List<Long> myHabits;
 }

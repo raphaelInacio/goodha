@@ -1,15 +1,19 @@
-package br.com.goodha.accounts;
+package com.raphaeliinacio.accounts;
 
-import br.com.goodha.habits.Habit;
+
+import lombok.Data;
 import org.springframework.cloud.gcp.data.datastore.core.mapping.Entity;
+import org.springframework.data.annotation.Id;
 
 import java.util.List;
 
 @Entity
+@Data
 public class Account {
+    @Id
     private Long id;
     private AccountTypeEnum accountTypeEnum;
     private String name;
     private String email;
-    private List<Habit> myHabits;
+    private List<Long> myHabits;
 }

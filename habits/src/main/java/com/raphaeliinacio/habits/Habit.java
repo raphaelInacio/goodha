@@ -1,4 +1,4 @@
-package br.com.goodha.habits;
+package com.raphaeliinacio.habits;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

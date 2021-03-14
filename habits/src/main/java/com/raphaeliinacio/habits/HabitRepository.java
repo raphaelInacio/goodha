@@ -1,4 +1,4 @@
-package br.com.goodha.habits;
+package com.raphaeliinacio.habits;
 
 import org.springframework.cloud.gcp.data.datastore.repository.DatastoreRepository;
 import org.springframework.stereotype.Repository;

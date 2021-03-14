@@ -1,4 +1,4 @@
-package br.com.goodha.accounts;
+package com.raphaeliinacio.accounts;
 
 
 import lombok.AllArgsConstructor;
