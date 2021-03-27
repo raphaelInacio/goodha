@@ -40,12 +40,15 @@ public class HabitsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<HabitPresentation> getHabitById(@PathVariable Long id) {
+        log.info("..: Buscando um habito com id, {}", id);
         var habit = habitRepository.findById(id);
 
         if (habit.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            log.info("..: Habito nao encontrado");
+            return ResponseEntity.noContent().build();
         }
 
+        log.info("..: Habito encontrado com sucesso");
         return ResponseEntity.ok(modelMapper.map(habit.get(), HabitPresentation.class));
     }
 

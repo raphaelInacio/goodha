@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.raphaeliinacio</groupId>
-	<artifactId>habits</artifactId>
+	<artifactId>habits-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>habits</name>
 	<description>Microservice for manage habits</description>
@@ -105,7 +105,7 @@
 				<version>2.4.0</version>
 				<configuration>
 					<projectId>GCLOUD_CONFIG</projectId>
-					<version>springboot-goodha</version>
+					<version>habits-service-1</version>
 				</configuration>
 			</plugin>
 		</plugins>

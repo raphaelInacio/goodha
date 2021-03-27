@@ -42,6 +42,11 @@
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-gcp-data-datastore</artifactId>
 		</dependency>
 
@@ -105,7 +110,7 @@
 				<version>2.4.0</version>
 				<configuration>
 					<projectId>GCLOUD_CONFIG</projectId>
-					<version>springboot-goodha</version>
+					<version>accounts-service</version>
 				</configuration>
 			</plugin>
 		</plugins>
