@@ -8,9 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping("/v1/habits")
@@ -54,7 +56,7 @@ public class HabitsController {
 
     @PutMapping("/{id}")
     public ResponseEntity<HabitPresentation> update(@RequestBody HabitPresentation presentation, @PathVariable Long id) {
-        log.info("..: Atualizando um novo habito, {}, com id, {}", presentation, id);
+
         var habit = habitRepository.findById(id);
 
         if (habit.isEmpty()) {
@@ -66,6 +68,31 @@ public class HabitsController {
 
         uptdatedHabit = habitRepository.save(modelMapper.map(presentation, Habit.class));
         return ResponseEntity.ok(modelMapper.map(uptdatedHabit, HabitPresentation.class));
+    }
+
+    @PostMapping("/all-by-ids")
+    public ResponseEntity<List<HabitPresentation>> findAllById(@RequestBody List<Long> ids) {
+        log.info("..: Buscando habitos por ids {}", ids);
+
+        Iterable<Habit> allById = habitRepository.findAllById(ids);
+
+        List<Habit> habits = StreamSupport
+                .stream(allById.spliterator(), false)
+                .collect(Collectors.toList());
+
+        if (habits.isEmpty()) {
+            log.info("..: Habitos não encontrados");
+            ResponseEntity.noContent().build();
+        }
+
+        List<HabitPresentation> habitPresentations = habits
+                .stream()
+                .map(habit -> modelMapper.map(habit, HabitPresentation.class))
+                .collect(Collectors.toList());
+
+        log.info("..: Habitos encontrados {}", habitPresentations);
+
+        return ResponseEntity.ok(habitPresentations);
     }
 
     @PostMapping

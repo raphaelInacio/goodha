@@ -59,14 +59,7 @@ public class AccountsController {
             return ResponseEntity.ok(AccountPresentation.fromDomain(account.get(), Collections.emptyList()));
         }
 
-        List<HabitPresentation> habitPresentations =
-                account.get()
-                        .getMyHabits()
-                        .stream()
-                        .filter(Objects::nonNull)
-                        .parallel()
-                        .map(habitId -> client.getHabitById(habitId))
-                        .collect(Collectors.toList());
+        List<HabitPresentation> habitPresentations = client.allHabitsByIds(account.get().getMyHabits());
 
         log.info("..: Account encontrada, {} :.. ", account);
 
@@ -84,18 +77,10 @@ public class AccountsController {
                 .parallel()
                 .filter(Objects::nonNull)
                 .map(account -> {
-
                     if (Objects.isNull(account.getMyHabits())) {
                         return AccountPresentation.fromDomain(account, Collections.EMPTY_LIST);
                     }
-
-                    List<HabitPresentation> habitPresentations =
-                            account
-                                    .getMyHabits()
-                                    .stream()
-                                    .filter(Objects::nonNull)
-                                    .map(habitId -> client.getHabitById(habitId))
-                                    .collect(Collectors.toList());
+                    List<HabitPresentation> habitPresentations = client.allHabitsByIds(account.getMyHabits());
                     return AccountPresentation.fromDomain(account, habitPresentations);
                 })
                 .collect(Collectors.toList());

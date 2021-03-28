@@ -62,6 +62,18 @@ class AccountsControllerTest {
                 .andDo(print());
     }
 
+
+    @Test
+    @DisplayName("Lista todas as accounts")
+    void deveListarTodasAccounts(@Autowired MockMvc mvc) throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/v1/accounts")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers
+                        .status()
+                        .isOk())
+                .andDo(print());
+    }
+
     @Test
     @DisplayName("Recupera uma account por ID")
     void deveRecuperarUmaNovaAccountPorId(@Autowired MockMvc mvc) throws Exception {

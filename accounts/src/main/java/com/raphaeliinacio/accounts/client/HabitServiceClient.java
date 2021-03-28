@@ -15,6 +15,8 @@ public interface HabitServiceClient {
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     HabitPresentation getHabitById(@PathVariable("id") Long id);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/all")
-    HabitPresentation allHabitsByIds(@RequestBody List<Long> ids);
+    @RequestMapping(method = RequestMethod.POST, value = "/all-by-ids")
+    List<HabitPresentation> allHabitsByIds(@RequestBody List<Long> ids);
+
+
 }

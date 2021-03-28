@@ -8,4 +8,5 @@ import java.util.List;
 @Repository("habitsRepository")
 public interface HabitRepository extends DatastoreRepository<Habit, Long> {
     List<Habit> findAll();
+//    List<Habit> findAllById(List<Long> ids);
 }
