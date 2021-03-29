@@ -1,4 +1,4 @@
-package br.com.goodha.records;
+package com.raphaeliinacio.records;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +19,6 @@ public class Record {
     private Long id;
     private Long habitId;
     private Long accountId;
-    private LocalDateTime date;
+    private LocalDateTime date = LocalDateTime.now();
     private Boolean done = false;
 }
