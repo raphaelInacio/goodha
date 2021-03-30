@@ -96,7 +96,7 @@ class AccountsControllerTest {
 
     @Test
     @DisplayName("Adciona um novo habito para uma account existente")
-    void deveAdcionarUmaNovoHabitoParaUmaAccount(@Autowired MockMvc mvc) throws Exception {
+    void deveAdicionarUmaNovoHabitoParaUmaAccount(@Autowired MockMvc mvc) throws Exception {
 
         var newAccountPresentation = getAccountPresentation();
         var addHabitPresentation = getAddHabitPresentation();

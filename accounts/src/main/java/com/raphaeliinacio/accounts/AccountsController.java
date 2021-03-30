@@ -2,6 +2,8 @@ package com.raphaeliinacio.accounts;
 
 import com.raphaeliinacio.accounts.client.HabitPresentation;
 import com.raphaeliinacio.accounts.client.HabitServiceClient;
+import com.raphaeliinacio.accounts.client.RecordRepresentation;
+import com.raphaeliinacio.accounts.client.RecordServiceClient;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,10 @@ public class AccountsController {
     private AccountsRepository repository;
 
     @Autowired
-    private HabitServiceClient client;
+    private HabitServiceClient habitServiceClient;
+
+    @Autowired
+    private RecordServiceClient recordServiceClient;
 
     @Autowired
     private ModelMapper mapper;
@@ -59,9 +64,20 @@ public class AccountsController {
             return ResponseEntity.ok(AccountPresentation.fromDomain(account.get(), Collections.emptyList()));
         }
 
-        List<HabitPresentation> habitPresentations = client.allHabitsByIds(account.get().getMyHabits());
+        log.info("..: Buscando habitos, {} ", id);
+        List<HabitPresentation> habitPresentations = habitServiceClient.allHabitsByIds(account.get().getMyHabits());
 
-        log.info("..: Account encontrada, {} :.. ", account);
+        log.info("..: Buscando registros, {} ", id);
+        List<RecordRepresentation> recordsByAccount = recordServiceClient.getRecordsByAccount(account.get().getId());
+
+
+        habitPresentations
+                .stream()
+                .forEach(habitPresentation -> habitPresentation.addRecords(
+                        recordsByAccount
+                                .stream()
+                                .filter(recordRepresentation -> Objects.equals(habitPresentation.getId(), recordRepresentation.getHabitId()))
+                                .collect(Collectors.toList())));
 
         return ResponseEntity.ok(AccountPresentation.fromDomain(account.get(), habitPresentations));
     }
@@ -80,11 +96,10 @@ public class AccountsController {
                     if (Objects.isNull(account.getMyHabits())) {
                         return AccountPresentation.fromDomain(account, Collections.EMPTY_LIST);
                     }
-                    List<HabitPresentation> habitPresentations = client.allHabitsByIds(account.getMyHabits());
+                    List<HabitPresentation> habitPresentations = habitServiceClient.allHabitsByIds(account.getMyHabits());
                     return AccountPresentation.fromDomain(account, habitPresentations);
                 })
                 .collect(Collectors.toList());
-
 
         log.info("..: Accounts encontradas, {} :.. ", accountPresentations);
 
