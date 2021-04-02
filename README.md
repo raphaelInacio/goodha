@@ -54,15 +54,24 @@ O projeto está estruturado como um monorepo divido em 3 microserviços
   
 ``gcloud app deploy  src/main/appengine/accounts-service.yaml``
 ``https://accounts-service-dot-macro-scion-300810.rj.r.appspot.com/v1/accounts/6025144992530432``
+`` docker build -t raphaelinacio/accounts-service .``
+`` docker run --publish 8080:8080 -v ~/.config:/root/.config raphaelinacio/accounts-service``
 
 - **Habits** Responsável por gerenciar as todos os habitos criados no sistema, hoje o sistema já possui alguns habitos
   padrão para todos os usuário como também permite a criação de habitos exclusivos
 
 ``https://habits-service-dot-macro-scion-300810.rj.r.appspot.com/v1/habits``
 ``gcloud app deploy  src/main/appengine/habits-service.yaml``
+``ddocker build -t raphaelinacio/habits-service .``
+`` docker run --publish 8080:8080 -v ~/.config:/root/.config raphaelinacio/habits-service``
+
 
 - **Records** Resposabilidade do microserviço de records é registrar as atividades dos usuários,
-
+  
+``https://habits-service-dot-macro-scion-300810.rj.r.appspot.com/v1/habits``
+  ``gcloud app deploy  src/main/appengine/habits-service.yaml``
+  ``docker build -t raphaelinacio/records-service .``
+`` docker run --publish 8080:8080 -v ~/.config:/root/.config raphaelinacio/records-service``
 
 #### Problemas
 
@@ -84,3 +93,5 @@ O projeto está estruturado como um monorepo divido em 3 microserviços
 * URl do projeto ``https://macro-scion-300810.rj.r.appspot.com/v1/habits/hello``
 
 * URl do portal do desenvolvedor ``https://endpointsportal.macro-scion-300810.cloud.goog/``
+
+* docker build --build-arg JAR_FILE=build/libs/\*.jar -t raphaelinacio/accounts-service .

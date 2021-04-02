@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+/accounts/good-habits-app.json
+/habits/good-habits-app.json
+/records/good-habits-app.json

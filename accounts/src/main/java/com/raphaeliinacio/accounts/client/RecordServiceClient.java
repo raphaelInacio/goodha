@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(value = "habbitService", url = "https://records-service-dot-macro-scion-300810.rj.r.appspot.com/v1/records")
+@FeignClient(value = "recordService", url = "https://records-service-dot-macro-scion-300810.rj.r.appspot.com/v1/records")
 public interface RecordServiceClient {
     @GetMapping("/{accountId}")
-    public List<RecordRepresentation> getRecordsByAccount(@PathVariable("accountId") Long accountId);
+    List<RecordRepresentation> getRecordsByAccount(@PathVariable("accountId") Long accountId);
 }

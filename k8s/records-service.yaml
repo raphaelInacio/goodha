@@ -1,0 +1,19 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: records-service-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: records-service
+    spec:
+      containers:
+        - name: records-service
+          image: raphaelinacio/records-service
+          ports:
+            - containerPort: 8080
+  selector:
+    matchLabels:
+      app: records-service

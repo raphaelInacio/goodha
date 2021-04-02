@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -71,13 +70,15 @@ public class AccountsController {
         List<RecordRepresentation> recordsByAccount = recordServiceClient.getRecordsByAccount(account.get().getId());
 
 
-        habitPresentations
-                .stream()
-                .forEach(habitPresentation -> habitPresentation.addRecords(
-                        recordsByAccount
-                                .stream()
-                                .filter(recordRepresentation -> Objects.equals(habitPresentation.getId(), recordRepresentation.getHabitId()))
-                                .collect(Collectors.toList())));
+        if (Objects.nonNull(recordsByAccount)) {
+            habitPresentations
+                    .stream()
+                    .forEach(habitPresentation -> habitPresentation.addRecords(
+                            recordsByAccount
+                                    .stream()
+                                    .filter(recordRepresentation -> Objects.equals(habitPresentation.getId(), recordRepresentation.getHabitId()))
+                                    .collect(Collectors.toList())));
+        }
 
         return ResponseEntity.ok(AccountPresentation.fromDomain(account.get(), habitPresentations));
     }

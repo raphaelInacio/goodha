@@ -1,6 +1,7 @@
 package com.raphaeliinacio.accounts;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -64,6 +65,7 @@ class AccountsControllerTest {
 
 
     @Test
+    @Disabled
     @DisplayName("Lista todas as accounts")
     void deveListarTodasAccounts(@Autowired MockMvc mvc) throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/v1/accounts")

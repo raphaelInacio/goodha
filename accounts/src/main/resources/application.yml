@@ -6,6 +6,8 @@ spring:
     name: accounts-service
   cloud:
     gcp:
+      credentials:
+        location: ${CREDENTIALS_FILE}
       datastore:
         enabled: true
         project-id: macro-scion-300810
