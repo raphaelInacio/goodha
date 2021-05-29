@@ -1,7 +1,9 @@
-package com.raphaeliinacio.accounts;
+package com.raphaeliinacio.accounts.controller;
 
 
 import com.raphaeliinacio.accounts.client.HabitPresentation;
+import com.raphaeliinacio.accounts.domain.Account;
+import com.raphaeliinacio.accounts.domain.AccountTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

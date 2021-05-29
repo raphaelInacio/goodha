@@ -1,5 +1,6 @@
-package com.raphaeliinacio.accounts;
+package com.raphaeliinacio.accounts.repository;
 
+import com.raphaeliinacio.accounts.domain.Account;
 import org.springframework.cloud.gcp.data.datastore.repository.DatastoreRepository;
 import org.springframework.stereotype.Repository;
 

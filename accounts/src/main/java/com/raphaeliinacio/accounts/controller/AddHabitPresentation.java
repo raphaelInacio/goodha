@@ -1,4 +1,4 @@
-package com.raphaeliinacio.accounts;
+package com.raphaeliinacio.accounts.controller;
 
 import lombok.*;
 

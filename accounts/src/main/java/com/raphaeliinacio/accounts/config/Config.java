@@ -1,4 +1,4 @@
-package com.raphaeliinacio.accounts;
+package com.raphaeliinacio.accounts.config;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import org.modelmapper.ModelMapper;

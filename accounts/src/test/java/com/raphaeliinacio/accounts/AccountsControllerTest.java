@@ -1,6 +1,11 @@
 package com.raphaeliinacio.accounts;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.raphaeliinacio.accounts.controller.AccountPresentation;
+import com.raphaeliinacio.accounts.controller.AddHabitPresentation;
+import com.raphaeliinacio.accounts.domain.Account;
+import com.raphaeliinacio.accounts.domain.AccountTypeEnum;
+import com.raphaeliinacio.accounts.repository.AccountsRepository;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,9 +1,10 @@
-package com.raphaeliinacio.accounts;
+package com.raphaeliinacio.accounts.controller;
 
+import com.raphaeliinacio.accounts.repository.AccountsRepository;
 import com.raphaeliinacio.accounts.client.HabitPresentation;
 import com.raphaeliinacio.accounts.client.HabitServiceClient;
-import com.raphaeliinacio.accounts.client.RecordRepresentation;
 import com.raphaeliinacio.accounts.client.RecordServiceClient;
+import com.raphaeliinacio.accounts.domain.Account;
 import com.raphaeliinacio.accounts.service.AccountsService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

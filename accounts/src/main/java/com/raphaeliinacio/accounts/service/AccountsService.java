@@ -1,12 +1,11 @@
 package com.raphaeliinacio.accounts.service;
 
-import com.raphaeliinacio.accounts.AccountPresentation;
-import com.raphaeliinacio.accounts.AccountsRepository;
+import com.raphaeliinacio.accounts.controller.AccountPresentation;
+import com.raphaeliinacio.accounts.repository.AccountsRepository;
 import com.raphaeliinacio.accounts.client.HabitPresentation;
 import com.raphaeliinacio.accounts.client.RecordRepresentation;
 import com.raphaeliinacio.accounts.repository.HabitRepository;
 import com.raphaeliinacio.accounts.repository.RecordRepository;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

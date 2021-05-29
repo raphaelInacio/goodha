@@ -22,14 +22,19 @@ public class HabitRepositoryImpl implements HabitRepository {
 
     @Override
     @CircuitBreaker(name = BACKEND)
-//    @RateLimiter(name = BACKEND)
-//    @Bulkhead(name = BACKEND)
-//    @Retry(name = BACKEND)
-//    @TimeLimiter(name = BACKEND)
+    @RateLimiter(name = BACKEND)
+    @Bulkhead(name = BACKEND)
+    @Retry(name = BACKEND)
+    @TimeLimiter(name = BACKEND)
     public HabitPresentation getHabitById(Long id) {
         return habitServiceClient.getHabitById(id);
     }
 
+    @CircuitBreaker(name = BACKEND)
+    @RateLimiter(name = BACKEND)
+    @Bulkhead(name = BACKEND)
+    @Retry(name = BACKEND)
+    @TimeLimiter(name = BACKEND)
     public List<HabitPresentation> allHabitsByIds(List<Long> ids) {
         return habitServiceClient.allHabitsByIds(ids);
     }

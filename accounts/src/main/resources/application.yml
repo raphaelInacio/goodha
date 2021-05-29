@@ -61,10 +61,45 @@ resilience4j.retry:
     records-service:
       maxAttempts: 3
       waitDuration: 10s
-      enableExponentialBackoff: true
-      exponentialBackoffMultiplier: 2
       retryExceptions:
         - org.springframework.web.client.HttpServerErrorException
         - java.io.IOException
       ignoreExceptions:
         - io.github.robwin.exception.BusinessException
+
+resilience4j.bulkhead:
+  instances:
+    habit-service:
+      maxConcurrentCalls: 10
+    records-service:
+      maxWaitDuration: 10ms
+      maxConcurrentCalls: 20
+
+resilience4j.thread-pool-bulkhead:
+  instances:
+    backendC:
+      maxThreadPoolSize: 1
+      coreThreadPoolSize: 1
+      queueCapacity: 1
+
+resilience4j.ratelimiter:
+  instances:
+    habit-service:
+      limitForPeriod: 10
+      limitRefreshPeriod: 1s
+      timeoutDuration: 0
+      registerHealthIndicator: true
+      eventConsumerBufferSize: 100
+    records-service:
+      limitForPeriod: 6
+      limitRefreshPeriod: 500ms
+      timeoutDuration: 3s
+
+resilience4j.timelimiter:
+  instances:
+    habit-service:
+      timeoutDuration: 2s
+      cancelRunningFuture: true
+    records-service:
+      timeoutDuration: 1s
+      cancelRunningFuture: false

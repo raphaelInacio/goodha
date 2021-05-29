@@ -1,4 +1,4 @@
-package com.raphaeliinacio.accounts;
+package com.raphaeliinacio.accounts.domain;
 
 
 import lombok.Data;
@@ -18,7 +18,7 @@ public class Account {
     private String email;
     private List<Long> myHabits;
 
-    void addHabit(Long habitId) {
+    public void addHabit(Long habitId) {
         if (myHabits == null) {
             myHabits = new ArrayList<>();
         }

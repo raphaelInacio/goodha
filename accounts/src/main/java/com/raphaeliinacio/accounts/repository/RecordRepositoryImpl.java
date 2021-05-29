@@ -16,10 +16,16 @@ import java.util.List;
 public class RecordRepositoryImpl implements RecordRepository {
 
     private static final String BACKEND = "records-service";
+
     @Autowired
     private RecordServiceClient recordServiceClient;
 
     @Override
+    @CircuitBreaker(name = BACKEND)
+    @RateLimiter(name = BACKEND)
+    @Bulkhead(name = BACKEND)
+    @Retry(name = BACKEND)
+    @TimeLimiter(name = BACKEND)
     public List<RecordRepresentation> getRecordsByAccount(Long accountId) {
         return recordServiceClient.getRecordsByAccount(accountId);
     }

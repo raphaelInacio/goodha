@@ -1,4 +1,4 @@
-package com.raphaeliinacio.accounts;
+package com.raphaeliinacio.accounts.domain;
 
 
 import lombok.AllArgsConstructor;
