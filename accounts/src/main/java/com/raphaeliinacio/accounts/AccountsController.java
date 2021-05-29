@@ -4,6 +4,7 @@ import com.raphaeliinacio.accounts.client.HabitPresentation;
 import com.raphaeliinacio.accounts.client.HabitServiceClient;
 import com.raphaeliinacio.accounts.client.RecordRepresentation;
 import com.raphaeliinacio.accounts.client.RecordServiceClient;
+import com.raphaeliinacio.accounts.service.AccountsService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class AccountsController {
     @Autowired
     private ModelMapper mapper;
 
+    @Autowired
+    private AccountsService accountsService;
+
     @PostMapping
     public ResponseEntity<AccountPresentation> creteAccount(@RequestBody AccountPresentation presentation) {
         log.info("..: Criando uma nova account, {} ", presentation);
@@ -51,36 +55,9 @@ public class AccountsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<AccountPresentation> getAccount(@PathVariable Long id) {
-        log.info("..: Buscando uma nova account, {} ", id);
-        var account = repository.findById(id);
-
-        if (account.isEmpty()) {
-            log.info("..: Account não encontrada, {} :.. ", id);
-            return ResponseEntity.noContent().build();
-        }
-
-        if (Objects.isNull(account.get().getMyHabits()) || account.get().getMyHabits().isEmpty()) {
-            return ResponseEntity.ok(AccountPresentation.fromDomain(account.get(), Collections.emptyList()));
-        }
-
-        log.info("..: Buscando habitos, {} ", id);
-        List<HabitPresentation> habitPresentations = habitServiceClient.allHabitsByIds(account.get().getMyHabits());
-
-        log.info("..: Buscando registros, {} ", id);
-        List<RecordRepresentation> recordsByAccount = recordServiceClient.getRecordsByAccount(account.get().getId());
-
-
-        if (Objects.nonNull(recordsByAccount)) {
-            habitPresentations
-                    .stream()
-                    .forEach(habitPresentation -> habitPresentation.addRecords(
-                            recordsByAccount
-                                    .stream()
-                                    .filter(recordRepresentation -> Objects.equals(habitPresentation.getId(), recordRepresentation.getHabitId()))
-                                    .collect(Collectors.toList())));
-        }
-
-        return ResponseEntity.ok(AccountPresentation.fromDomain(account.get(), habitPresentations));
+        log.info("..: Buscando uma account, {} ", id);
+        AccountPresentation accountById = accountsService.getAccountById(id);
+        return ResponseEntity.ok(accountById);
     }
 
     @GetMapping

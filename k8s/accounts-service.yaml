@@ -1,4 +1,5 @@
-apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+# Configurações do Pod
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: accounts-service-deployment
@@ -10,10 +11,59 @@ spec:
         app: accounts-service
     spec:
       containers:
-      - name: accounts-service
-        image: raphaelinacio/accounts-service:latest
-        ports:
-        - containerPort: 8080
+        - name: accounts-service
+          image: raphaelinacio/accounts-service:latest
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            failureThreshold: 5
+            initialDelaySeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            failureThreshold: 10
+            periodSeconds: 5
+            initialDelaySeconds: 10
+          resources:
+            requests:
+              cpu: 10m
   selector:
     matchLabels:
       app: accounts-service
+---
+# Configurações do Load Balancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: accounts-service-svc
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+  selector:
+    app: accounts-service
+
+---
+# Configurações de Auto Scaling
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: accounts-service-hpa
+spec:
+  maxReplicas: 10
+  minReplicas: 2
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: accounts-service-deployment

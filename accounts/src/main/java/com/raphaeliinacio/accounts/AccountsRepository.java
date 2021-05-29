@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface AccountsRepository extends DatastoreRepository<Account, Long> {
+    public interface AccountsRepository extends DatastoreRepository<Account, Long> {
     List<Account> findAll();
 
     Optional<Account> findByEmail(String email);

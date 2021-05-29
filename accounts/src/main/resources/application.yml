@@ -6,8 +6,8 @@ spring:
     name: accounts-service
   cloud:
     gcp:
-      credentials:
-        location: ${CREDENTIALS_FILE}
+#      credentials:
+#        location: ${CREDENTIALS_FILE}
       datastore:
         enabled: true
         project-id: macro-scion-300810
@@ -15,16 +15,56 @@ spring:
     allow-bean-definition-overriding: true
   server:
     port: 8080
+
+management:
   endpoints:
     web:
       exposure:
-        include: health, shutdown, prometheus
+        include: health, prometheus
   metrics:
     export:
       prometheus:
         enabled: true
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+      sla:
+        http:
+          server:
+            requests: 500ms, 1000ms, 2000ms, 4000ms
+      percentiles:
+        http:
+          server:
+            requests: 0.5, 0.9, 0.95, 0.99, 0.999
   endpoint:
     metrics:
-      enabled: true
+      enabled: false
     prometheus:
       enabled: true
+
+
+#Resilicience4j
+resilience4j.retry:
+  instances:
+    habit-service:
+      maxAttempts: 3
+      waitDuration: 10s
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      retryExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.io.IOException
+      ignoreExceptions:
+        - io.github.robwin.exception.BusinessException
+    records-service:
+      maxAttempts: 3
+      waitDuration: 10s
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      retryExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.io.IOException
+      ignoreExceptions:
+        - io.github.robwin.exception.BusinessException

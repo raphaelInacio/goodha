@@ -32,7 +32,7 @@ public class AccountPresentation {
         this.myHabits.add(habitPresentation);
     }
 
-    static AccountPresentation fromDomain(Account accountDomain, List<HabitPresentation> myHabits) {
+    public static AccountPresentation fromDomain(Account accountDomain, List<HabitPresentation> myHabits) {
         return AccountPresentation
                 .builder()
                 .name(accountDomain.getName())
